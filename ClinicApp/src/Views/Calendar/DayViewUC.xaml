@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="ClinicApp.Views.Calendar.DayViewUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClinicApp.Views.Calendar">
+    <Border Background="LightGray">
+        <!--Day view-->
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" 
+                    Content="Calendar" 
+                    Style="{StaticResource DayNavButtonStyle}" 
+                    HorizontalAlignment="Left" 
+                    Margin="10"
+                    Click="BackButtonClick"/>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center" 
+                        Margin="10">
+
+                <Button Content="Prev"
+                        Style="{StaticResource DayNavButtonStyle}"
+                        Margin="10"
+                        Click="PrevButtonClick"/>
+                <TextBlock HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           Text="{Binding DisplayedDayString}"
+                           Style="{StaticResource HeaderTextStyle}"/>
+                <Button Content="Next"
+                        Style="{StaticResource DayNavButtonStyle}"
+                        Margin="10"
+                        Click="NextButtonClick"/>
+            </StackPanel>
+            <!--DataGrid-->
+            <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                    CornerRadius="30" 
+                    Margin="10">
+                <DataGrid 
+                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                          x:Name="HomeDataGrid"
+                          ItemsSource="{Binding AppointmentList}" 
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          CanUserReorderColumns="False"
+                          CanUserSortColumns="False"
+                          Style="{StaticResource DataGridStyle1}">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Time" 
+                                                Width="0.5*" 
+                                                Binding="{Binding Time}"/>
+                        <DataGridTextColumn Header="Duration" 
+                                                Width="*" 
+                                                Binding="{Binding DurationStr}"/>
+                        <DataGridTextColumn Header="Clients" 
+                                                Width="*" 
+                                                Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Doctor" 
+                                                Width="*" 
+                                                Binding="{Binding DoctorName}"/>
+                        <DataGridTextColumn Header="Information" 
+                                                Width="2*" 
+                                                Binding="{Binding Description}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ItemContainerStyle>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="RowDoubleClick"/>
+                            <Style.Triggers>
+                                <DataTrigger Value="True">
+                                    <DataTrigger.Binding>
+                                        <MultiBinding Converter="{StaticResource appointmentRowConverter}">
+                                            <Binding Path="StartTime"/>
+                                            <Binding Path="Duration"/>
+                                        </MultiBinding>
+                                    </DataTrigger.Binding>
+                                    <Setter Property="Background" Value="Gray" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.ItemContainerStyle>
+                </DataGrid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

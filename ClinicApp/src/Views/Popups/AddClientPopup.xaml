@@ -1,0 +1,108 @@
+﻿<Window x:Class="ClinicApp.Views.Popups.AddClientPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClinicApp.Views.Popups"
+        xmlns:properties="clr-namespace:ClinicApp.Properties"
+        xmlns:viewModel="clr-namespace:ClinicApp.ViewModel"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="Add Client" Height="700" Width="600">
+    <Window.DataContext>
+        <viewModel:DoctorsListViewModel></viewModel:DoctorsListViewModel>
+    </Window.DataContext>
+    
+    <Grid>
+        <Border CornerRadius="30" Background="LightGray" Padding="0,10,0,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+
+                <!--Add new Client-->
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Height="2" Width="330" Fill="{StaticResource PrimaryColour}"/>
+                    <TextBlock Grid.Row="1"
+                               Text="Add New Client" 
+                               FontFamily="{StaticResource StandardFont}"
+                               FontSize="{Binding Source={x:Static properties:Settings.Default}, Path=DefaultFontSize}"
+                               Margin="0,10,0,0"
+                               Foreground="DarkOrchid"
+                               HorizontalAlignment="Center"/>
+                    
+                    <Border Grid.Row="2" CornerRadius="30" Background="LightGray">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,10,13" Height="30" Background="DarkOrchid">
+                                <TextBlock Grid.Column="1" Margin="30,0,60,0" FontSize="20"
+                                   Style="{StaticResource ListItemTextStyle}" Foreground="MintCream">First Name(required):</TextBlock>
+                                <TextBox Text="" Width="250" FontSize="16" Margin="0,3,0,3" Name="Fname"
+                                              Grid.Column="1"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,10,13" Height="30" Background="DarkOrchid">
+                                <TextBlock Grid.Column="1" Margin="30,0,63,0" FontSize="20"
+                                   Style="{StaticResource ListItemTextStyle}" Foreground="MintCream">Last Name(required):</TextBlock>
+                                <TextBox Text="" Width="250" FontSize="16" Margin="0,3,0,3" Name="Lname"
+                                              Grid.Column="1"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,10,13" Height="30" Background="DarkOrchid">
+                                <TextBlock Grid.Column="1" Margin="30,0,217,0" FontSize="20"
+                                   Style="{StaticResource ListItemTextStyle}" Foreground="MintCream">Email:</TextBlock>
+                                <TextBox Text="" Width="250" FontSize="16" Margin="0,3,0,3" Name="Email"
+                                              Grid.Column="1"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,10,13" Height="30" Background="DarkOrchid" >
+                                <TextBlock Grid.Column="1" Margin="30,0,107,0" FontSize="20"
+                                   FontFamily="{StaticResource StandardFont}" Foreground="MintCream">Phone(required):</TextBlock>
+                                <TextBox Text="" Width="250" FontSize="16" Margin="0,3,0,3" Name="Phone"
+                                              Grid.Column="1"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,10,13" Height="30" Background="DarkOrchid" Name="DateOfBirth">
+                                <TextBlock Grid.Column="1" Margin="30,0,0,0" FontSize="20"
+                                   FontFamily="{StaticResource StandardFont}" Foreground="MintCream">Date Of Birth:</TextBlock>
+                                <DatePicker Margin="133,0,0,0" Width="260" FontSize="15" x:Name="_DatePicker" CalendarOpened="_CalendarOpened"
+                                            SelectedDateChanged="SetDateOfBirth"></DatePicker>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,10,13" Height="30" Background="DarkOrchid">
+                                <TextBlock Grid.Column="1" Margin="30,0,73,0" FontSize="20"
+                                   Style="{StaticResource ListItemTextStyle}" Foreground="MintCream">Healthcare Number:</TextBlock>
+                                <TextBox Text="" Width="250" Margin="0,3,0,3" x:Name="HCNum"
+                                              Grid.Column="1"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,0,10,13" Height="30" Background="DarkOrchid">
+                                <TextBlock Grid.Column="1" Margin="30,0,118,5" FontSize="20"
+                                   Style="{StaticResource ListItemTextStyle}" Foreground="MintCream">Family Doctor:</TextBlock>
+                                <ComboBox Width="250" Margin="10,3,10,3" Text="Doctor" FontSize="14" x:Name="FamilyDoctor"
+                                  IsReadOnly="true" ItemsSource="{Binding Doctors}" DisplayMemberPath="LastName">
+                                </ComboBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <TextBlock Grid.Row="1"
+                               Text="* Please fill out required fields" 
+                               FontFamily="{StaticResource StandardFont}"
+                               FontWeight="Bold"
+                               FontSize="24"
+                               Margin="10,10,0,0"
+                               Visibility="Hidden"
+                               x:Name="errormsg"
+                               Foreground="#ff0033"/>
+                    <Button Margin="355,110,130,30" Grid.Column="1" Content="Cancel" Style="{StaticResource CloseButtonStyle}" Click="Close"/>
+                    <Button Margin="480,110,10,30" Grid.Column="2" Content="Add" Style="{StaticResource AddButtonStyle}" Click="Add" />
+
+                </Grid>
+            </Grid>
+            
+        </Border>
+    </Grid>
+</Window>

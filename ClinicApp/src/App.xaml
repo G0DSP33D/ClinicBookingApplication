@@ -1,0 +1,22 @@
+﻿<Application x:Class="ClinicApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ClinicApp"
+             xmlns:viewModel="clr-namespace:ClinicApp.ViewModel"
+             xmlns:view="clr-namespace:ClinicApp.Views"
+             xmlns:common="clr-namespace:ClinicApp.Common"
+             xmlns:calendarView="clr-namespace:ClinicApp.Views.Calendar"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/ResourceDictionary.xaml"/>
+                <ResourceDictionary Source="Styles/UserControlDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:AppointmentViewModel}">
+                <view:AppointmentTest/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="ClinicApp.Views.AccountUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:view="clr-namespace:ClinicApp.Views"
+             xmlns:viewModel="clr-namespace:ClinicApp.ViewModel"
+             xmlns:properties="clr-namespace:ClinicApp.Properties"
+             mc:Ignorable="d">
+
+    <UserControl.DataContext>
+        <viewModel:HomeViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border CornerRadius="30" Margin="10" Background="LightGray">
+            <Grid x:Name ="contentgrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width ="90"/>
+                    <ColumnDefinition Width ="160"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="160"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="138"/>
+                    <RowDefinition Height="100"/>
+
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+
+                <Button x:Name ="userbutton1" Height="150" Width="150" Grid.Row="1" Grid.Column="1" Click="user1_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage UriSource="/Photos/doctor.png"/>
+                                </Image.Source>
+                            </Image>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+
+                <Button x:Name ="userbutton2" Height="150" Width="150" Grid.Row="1" Grid.Column="3" Click="user2_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image>
+                                <Image.Source>
+                                <BitmapImage UriSource="/Photos/doctor2.png"/>
+                            </Image.Source>
+                             </Image>
+
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button x:Name ="userbutton3" Height="150" Width="150" Grid.Row="1" Grid.Column="5" Click="user3_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage UriSource="/Photos/receptionist.png"/>
+                                </Image.Source>
+                            </Image>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <TextBlock  Grid.Row="0" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="2"
+                           FontFamily="{StaticResource StandardFont}"
+                           FontSize="28" HorizontalAlignment="Center"
+                           Height="30"
+                           Margin="-100,0,0,10"
+                            
+                           >Select profile</TextBlock>
+                <TextBlock x:Name ="username1" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"                            
+                           FontFamily="{StaticResource StandardFont}"
+                           Foreground="Black"
+                           FontSize="20"
+                           Grid.ColumnSpan="3" 
+                           >Keith Lawson <LineBreak/>Doctor
+                </TextBlock>
+                <TextBlock x:Name="username2" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"                            
+                           FontFamily="{StaticResource StandardFont}"
+                           Foreground="Black"
+                           FontSize="20"
+                           Grid.ColumnSpan="3"
+                           >Emily Hudson <LineBreak/>Doctor
+                </TextBlock>
+                <TextBlock x:Name ="username3" Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center"                            
+                           FontFamily="{StaticResource StandardFont}"
+                           Foreground="Black"
+                           FontSize="20"
+                           >Mary Mezler <LineBreak/>Receptionist
+                </TextBlock>
+
+
+                <Border Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3"
+                        Height="150" Width="250" HorizontalAlignment="Center" 
+                        BorderBrush="DarkGray" Background="White" BorderThickness="2" CornerRadius="30">
+                    <TextBlock FontFamily="{StaticResource StandardFont}" FontSize="25"
+                          Margin="0, 30,0,0" HorizontalAlignment="Center"
+                           >Enter Pin</TextBlock>
+
+                </Border>
+                <PasswordBox  x:Name ="pbox"  
+                             Height="30" Width="130" FontSize="20" MaxLength="10"  Grid.Column="3" Grid.Row="3" 
+                             Margin="0,10,0,0" KeyDown="OnKeyDown"></PasswordBox>
+
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
+

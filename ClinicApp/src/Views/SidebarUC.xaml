@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="ClinicApp.Views.SideBarUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:ClinicApp.ViewModel"
+             xmlns:properties="clr-namespace:ClinicApp.Properties"
+             mc:Ignorable="d" 
+             d:DesignWidth="400">
+
+    <UserControl.DataContext>
+        <viewModel:SideBarViewModel/>
+    </UserControl.DataContext>
+
+    <Grid x:Name="Grid">
+        <Border CornerRadius="30" Background="LightGray" Padding="0,10,0,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <!--Add Buttons Panel-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+					<Button Grid.Row="0" 
+                            Content="Add Appointment" 
+                            Style="{StaticResource AddButtonStyle}" 
+                            Click="AddAppointmentButton"/>
+                    <Button Grid.Row="1" Content="Add Client" Style="{StaticResource AddButtonStyle}" Click="addClientModal"/>
+                    <Button Grid.Row="2" Content="Add Doctor" Style="{StaticResource AddButtonStyle}" Click="addDoctorModal"/>
+                </Grid>
+
+                <!--Upcoming Panel-->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Height="2" Width="330" Fill="{StaticResource PrimaryColour}"/>
+                    <TextBlock Grid.Row="1"
+                               Text="Upcoming Appointments" 
+                               FontFamily="{StaticResource StandardFont}"
+                               FontSize="{Binding Source={x:Static properties:Settings.Default}, Path=DefaultFontSize}"
+                               Margin="0,20,0,0"
+                               Foreground="DarkOrchid"
+                               HorizontalAlignment="Center"/>
+                    <Border Grid.Row="2" CornerRadius="30" Background="LightGray">
+                        <ListView ItemsSource="{Binding AppointmentList}"
+                                  Margin="10,0,10,10"
+                                  Background="LightGray"
+                                  ScrollViewer.CanContentScroll="false">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel MouseLeftButtonDown="ShowAppointmentDetails">
+                                        <TextBlock Text="{Binding Time}"
+                                               Style="{StaticResource ListItemTextStyle}"/>
+                                        <TextBlock Text="{Binding Name}" x:Name="Name"
+                                               Style="{StaticResource ListItemTextStyle}"/>
+                                        <TextBlock Text="{Binding Description}"
+                                               Style="{StaticResource ListItemTextStyle}"/>
+                                        <TextBlock Text="{Binding DoctorName}" x:Name="DoctorName"
+                                               Style="{StaticResource ListItemTextStyle}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Margin" Value="10"/>
+                                    <Setter Property="Background" Value="White"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+
+</UserControl>
