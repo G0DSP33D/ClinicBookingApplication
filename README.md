@@ -1,7 +1,7 @@
-# Clinic App
+# Clinic Appointment Booking App
 
 ## Group 4
-Alden Lien, David Macababayao, Frank Ma, Joshua Kim, Arhum Ladak
+Made by: Alden Lien, David Macababayao, Frank Ma, Joshua Kim, Arhum Ladak
 
 ###### Made to be used on Industry Standard Monitor Resolutions (at least 1080p)
 
